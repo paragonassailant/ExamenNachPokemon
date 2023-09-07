@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Examen Nach</string>
+    <string name="img_description">Title Header</string>
+    <string name="price_example">Favorito</string>
+    <string name="pokemon_name">Pokémon</string>
+    <string name="pokemon_subName">Sub nombre</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
