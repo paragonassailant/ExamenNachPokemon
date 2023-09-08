@@ -12,6 +12,9 @@ interface PokemonDao {
     @Query("SELECT * FROM Pokemon ")
     fun getPokemon():List<Pokemon>
 
+    @Query("SELECT * FROM Pokemon WHERE id =:id")
+    fun getDetail(id:Int):Pokemon
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(a:Pokemon)
 

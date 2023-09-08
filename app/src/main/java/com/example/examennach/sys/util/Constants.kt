@@ -7,5 +7,6 @@ class Constants {
         const val DB_NAME = "Pokemon"
         const val URL_BASE = "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/"
         const val COMPLEMENT = "pokedex.json"
+        const val ID_POKEMON = "ID POKEMON"
     }
 }

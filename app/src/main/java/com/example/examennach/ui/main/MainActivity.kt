@@ -8,16 +8,15 @@ import android.os.Looper
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.examennach.R
 import com.example.examennach.data.entities.Pokemon
 import com.example.examennach.databinding.ActivityMainBinding
+import com.example.examennach.sys.util.Constants.Companion.ID_POKEMON
 import com.example.examennach.ui.detail.PokemonDetailFragment
 import com.example.examennach.ui.main.adapter.PokemonAdapter
 import com.example.examennach.ui.main.auxiliar.IHelper
-import com.example.examennach.ui.preferences.FavoritePreferences
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -27,7 +26,6 @@ class MainActivity : AppCompatActivity(), IHelper {
     private lateinit var viewModel: PokemonViewModel
     private lateinit var binding: ActivityMainBinding
     private lateinit var pokemonAdapter: PokemonAdapter
-    private lateinit var favoritePreferences: FavoritePreferences
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +39,6 @@ class MainActivity : AppCompatActivity(), IHelper {
         viewModel.requestPokemon()
         binding.ltAnim.visibility = View.VISIBLE
 
-        favoritePreferences = FavoritePreferences(this)
         setObservers()
     }
 
@@ -69,25 +66,27 @@ class MainActivity : AppCompatActivity(), IHelper {
     }
 
     override fun pokemon(pokemon: Pokemon) {
-        val fragment = PokemonDetailFragment()
-        openDetailFragment(fragment)
+        openDetailFragment(pokemon.id)
     }
 
     override fun favorite(position: Int, isChecked: Boolean) {
         if (isChecked) {
-            favoritePreferences.setChecked(true)
-        } else {
-            favoritePreferences.setChecked(false)
-        }
 
+        } else {
+
+        }
 
     }
 
 
-    private fun openDetailFragment(fragment: Fragment) {
+    private fun openDetailFragment(id: Int) {
+        val bundle = Bundle()
+        val fragment = PokemonDetailFragment()
+        bundle.putInt(ID_POKEMON, id)
+        fragment.arguments = bundle
         val fm = supportFragmentManager
         val ft = fm.beginTransaction()
-        ft.replace(R.id.main_container, fragment)
+        ft.add(R.id.main_container, fragment)
         ft.addToBackStack(null)
         ft.commit()
     }
